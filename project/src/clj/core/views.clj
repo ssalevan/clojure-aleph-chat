@@ -1,4 +1,4 @@
-(ns core.views
+(ns clj.core.views
   (:use lamina.core))
 
 (defn chat-init [ch]

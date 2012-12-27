@@ -1,11 +1,12 @@
-(ns core.main
-  (:use lamina.core
+(ns clj.core.main
+  (:use overtone.live
+        lamina.core
         aleph.http
         compojure.core
         ; This sets the correct file type for js includes used by hiccup
         (ring.middleware resource file-info)
-        core.views
-        core.templates)
+        clj.core.views
+        clj.core.templates)
   (:require [compojure.route :as route])
   (:gen-class))
 
@@ -21,12 +22,15 @@
       (wrap-resource "public")
       (wrap-file-info)))
 
+(def fart (sample (freesound-path 36958)))
+
 (defn chat [ch request]
   "View handler that handles a chat room. If it's not
   a websocket request then return a rendered html response."
   (let [params (:route-params request)
         room (:room params)]
     (if (:websocket request)
+      (demo (fart))
       (chat-handler ch room)
       (enqueue ch (wrapped-sync-app request)))))
 

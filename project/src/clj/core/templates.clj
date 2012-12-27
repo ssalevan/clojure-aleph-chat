@@ -1,4 +1,4 @@
-(ns core.templates
+(ns clj.core.templates
   (:use (hiccup core page)))
 
 (defn page []
